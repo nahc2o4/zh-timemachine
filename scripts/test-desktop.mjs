@@ -181,6 +181,8 @@ try {
   assert.equal(result.periods[0].opinions[0].label, '期待夺冠')
   await page.getByRole('button', { name: 'NiKo 能否夺冠', exact: true }).click()
   await page.getByText('观点随时间的变化', { exact: true }).waitFor()
+  // Keep the documentation screenshot clear of transient notifications.
+  await page.locator('.toast').waitFor({ state: 'hidden' })
   await page.screenshot({ path: join(output, 'research.png'), fullPage: true })
   await page.getByRole('button', { name: /2025/ }).click()
   assert.equal(
